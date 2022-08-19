@@ -1,0 +1,33 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<div class="d-flex align-items-center flex-column  mb-3 justify-content-center" style="height: 80%;">
+  <h1>Створити нагадування</h1>
+
+  <h2>{{ error }}</h2>
+
+  <form method="POST" class="p-2">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="title" class="col-sm-4 col-form-label">
+        Нагадування
+      </label>
+      <input type="text" class="form-control" name="title" id="title" >
+    </div>
+    <div class="mb-3">
+      <label for="memo" class="form-label">
+        Примітка
+      </label>
+      <textarea class="form-control" name="memo" id="memo"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="important">
+        Важливо
+      </label>
+      <input class="form-input" type="checkbox" id="important" name="important">
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 6.0rem; --bs-btn-font-size: 1.0rem;">Готово</button>
+  </form>
+</div>
+
+{% endblock %}

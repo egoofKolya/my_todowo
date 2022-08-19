@@ -1,0 +1,20 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<h1>Поточні</h1>
+<ul>
+  {% for todo in todos %}
+  <li>
+    <h2><a href="{% url 'viewtodo' todo.id %}">
+    {% if todo.important %}<b>{% endif %}{{ todo.title }}{% if todo.important %}</b>{% endif %}
+    {% if todo.memo %} - {{ todo.memo }}{% endif %}
+    </a></h2>
+  </li>
+  {% endfor %}
+</ul>
+<b><a class="btn btn-primary" href="{% url 'createtodos' %}">Додати нове</a></b>
+
+
+
+{% endblock %}

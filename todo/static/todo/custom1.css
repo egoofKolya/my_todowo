@@ -1,0 +1,22 @@
+.navbar-nav .nav-link {
+    color: rgba(146,148,150) !important;
+}
+
+.navbar-nav .nav-link:hover {
+     color: rgba(30,147,214) !important;
+     transition: 1s;
+}
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+body {
+  background: linear-gradient(blue, pink) fixed;
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+}
+.container {
+  min-height: 100%;
+}

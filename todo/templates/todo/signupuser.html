@@ -1,0 +1,27 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<div class="d-flex align-items-center flex-column  mb-3 justify-content-center" style="height: 80%;">
+  <h1>Реєстрація</h1>
+
+  <h2>{{ error }}</h2>
+
+  <form method="POST" class="p-2">
+    {% csrf_token %}
+  <div class="mb-3">
+    <label for="username" class="form-label">Ім'я користувача</label>
+    <input type="text" class="form-control" name="username" id="username" >
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Ваш пароль</label>
+    <input type="password" class="form-control" name="password1" id="password1">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Повторіть пароль будь-ласка</label>
+    <input type="password" class="form-control" name="password2" id="password2">
+  </div>
+
+  <button type="submit" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 6.0rem; --bs-btn-font-size: 1.0rem;">Реєстрація</<button>
+  </form>
+</div>
+{% endblock %}
