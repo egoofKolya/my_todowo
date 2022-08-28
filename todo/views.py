@@ -23,10 +23,10 @@ def signupuser(request):
                 login(request, user)
                 return redirect('currenttodos')
             except IntegrityError:
-                return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'That username has already been taken. Please choose a new username.'})
+                return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':"Це ім'я користувача вже зайнято'. Будь-ласка виберіть інше."})
 
         else:
-            return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not math'})
+            return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'Паролі не співпадають'})
 
 
 def loginuser(request):
@@ -35,7 +35,7 @@ def loginuser(request):
     else:
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'] )
         if user is None:
-            return render(request, 'todo/loginuser.html', {'form':AuthenticationForm(), 'error':'Username and password did not match'})
+            return render(request, 'todo/loginuser.html', {'form':AuthenticationForm(), 'error':"Невірне ім'я користувача або пароль"})
         else:
             login(request, user)
             return redirect('currenttodos')
@@ -58,7 +58,7 @@ def createtodos(request):
             newtodo.save()
             return redirect('currenttodos')
         except ValueError:
-            return render(request, 'todo/createtodos.html', {'form':TodoForm(), 'error':'Bad data passed in'})
+            return render(request, 'todo/createtodos.html', {'form':TodoForm(), 'error':'Перевірте правильність введених даних'})
 
 @login_required
 def currenttodos(request):
@@ -81,7 +81,7 @@ def viewtodo(request, todo_pk):
             form.save()
             return redirect('currenttodos')
         except ValueError:
-            return render(request, 'todo/viewtodo.html', {'todo':todo, 'form':form, 'error':'Bad info'})
+            return render(request, 'todo/viewtodo.html', {'todo':todo, 'form':form, 'error':'Непрвавильні дані'})
 
 @login_required
 def completetodo(request, todo_pk):

@@ -2,19 +2,17 @@
 
 {% block content %}
 
-Completed
-<ul>
-  {% for todo in todos %}
-  <li>
-    <a href="{% url 'viewtodo' todo.id %}">
-    {% if todo.important %}<b>{% endif %}{{ todo.title }}{% if todo.important %}</b>{% endif %}
-    {% if todo.memo %} - {{ todo.memo }}{% endif %}
-    {{ todo.datecompleted|date:'M j Y H:i' }}
-    </a>
-  </li>
-  {% endfor %}
-</ul>
-
-
+<div class="d-flex flex-column">
+  <div class="d-flex justify-content-center">
+    <h1>Завершені нагадування</h1>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="list-group col-md-7">
+        {% for todo in todos %}
+            <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b>{% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %}{{ todo.datecompleted|date:'M j Y H:i' }}</a>
+        {% endfor %}
+    </div>
+  </div>
+</div>
 
 {% endblock %}

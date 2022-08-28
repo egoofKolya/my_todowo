@@ -2,24 +2,52 @@
 
 {% block content %}
 
-{{ error}}
 
-{{ todo.title }}
+<div class="d-flex flex-column">
+  <div class="d-flex justify-content-center">
+    <h1>Нагадування</h1>
+  </div>
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+<div class="d-flex justify-content-center">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="title" class="col-sm-4 col-form-label">
+        Нагадування
+      </label>
+      <input type="text" class="form-control" name="title" id="title" value="{{ todo.title }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="memo" class="form-label">
+        Примітка
+      </label>
+      <textarea class="form-control" name="memo" id="memo">{{ todo.memo }}</textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="important">
+        Важливо
+      </label>
+      <input class="form-input" type="checkbox" id="important" name="important" {% if todo.important %}checked{% endif %}>
+    </div>
+      <button type="submit" class="btn btn-primary">Готово</button>
+      <button type="button" class="btn btn-success" onclick="$('#complete').click()">Завершити</button>
+      <button type="button" class="btn btn-danger" onclick="$('#delete').click()">Видалити</button>
+  </form>
+</div>
 
-<form method="POST">
-  {% csrf_token %}
-{{ form.as_p }}
-<button type="submit">Save</button>
-</form>
-
-<form method="POST" action="{% url 'completetodo' todo.id %}">
-  {% csrf_token %}
-<button type="submit">Complete</button>
-</form>
-
-<form method="POST" action="{% url 'deletetodo' todo.id %}">
-  {% csrf_token %}
-<button type="submit">Delete</button>
+{% if todo.datecompleted is None %}
+    <form style='display: none;' method="POST" action="{% url 'completetodo' todo.id %}">
+        {% csrf_token %}
+        <button id="complete" type="submit">Завершити</button>
+    </form>
+{% endif %}
+<form style='display: none;' method="POST" action="{% url 'deletetodo' todo.id %}">
+    {% csrf_token %}
+    <button id="delete" type="submit">Delete</button>
 </form>
 
 {% endblock %}

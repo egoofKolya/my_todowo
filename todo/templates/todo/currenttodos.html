@@ -1,20 +1,34 @@
 {% extends 'todo/base.html' %}
 
 {% block content %}
-
-<h1>Поточні</h1>
-<ul>
-  {% for todo in todos %}
-  <li>
-    <h2><a href="{% url 'viewtodo' todo.id %}">
-    {% if todo.important %}<b>{% endif %}{{ todo.title }}{% if todo.important %}</b>{% endif %}
-    {% if todo.memo %} - {{ todo.memo }}{% endif %}
-    </a></h2>
-  </li>
-  {% endfor %}
-</ul>
-<b><a class="btn btn-primary" href="{% url 'createtodos' %}">Додати нове</a></b>
-
-
+<div class="d-flex flex-column">
+  <div class="d-flex justify-content-center">
+    {% if todos %}
+      <h1>Поточні нагадування</h1>
+    {% endif %}
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="col-md-7">
+    {% if todos %}
+      <div class="list-group">
+          {% for todo in todos %}
+              <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b>{% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %}</a>
+          {% endfor %}
+      </div>
+      <br>
+      <br>
+      {% else %}
+          <div class="text-center">
+              <h2>Схоже у вас немає нагадувань</h2>
+              <br>
+              <br>
+          </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <b><a class="btn btn-primary" href="{% url 'createtodos' %}">Додати нове</a></b>
+  </div>
+</div>
 
 {% endblock %}
