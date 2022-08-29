@@ -9,7 +9,15 @@
   <div class="d-flex justify-content-center">
     <div class="list-group col-md-7">
         {% for todo in todos %}
-            <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b>{% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %}{{ todo.datecompleted|date:'M j Y H:i' }}</a>
+            <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %} d-flex justify-content-between">
+              <div class="completed_todo">
+                <b>{{ todo.title }}</b>{% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %}
+              </div>
+              <div class="completed_todo">
+                Завершено - {{ todo.datecompleted|date:'M j Y H:i' }}
+              </div>
+            </a>
+
         {% endfor %}
     </div>
   </div>
