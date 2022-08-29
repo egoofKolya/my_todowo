@@ -10,10 +10,10 @@
     <div class="list-group col-md-7">
         {% for todo in todos %}
             <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %} d-flex justify-content-between">
-              <div class="completed_todo">
+              <div>
                 <b>{{ todo.title }}</b>{% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %}
               </div>
-              <div class="completed_todo">
+              <div>
                 Завершено - {{ todo.datecompleted|date:'M j Y H:i' }}
               </div>
             </a>
